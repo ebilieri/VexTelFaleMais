@@ -8,7 +8,7 @@ using VexTel.Repository.Context;
 namespace VexTel.Repository.Migrations
 {
     [DbContext(typeof(VexTelContext))]
-    [Migration("20200202013836_Initial")]
+    [Migration("20200202031051_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -80,13 +80,13 @@ namespace VexTel.Repository.Migrations
             modelBuilder.Entity("VexTel.Domain.Entities.CustoChamada", b =>
                 {
                     b.HasOne("VexTel.Domain.Entities.DDD", "DDDDestino")
-                        .WithMany("CustoChamadasDestino")
+                        .WithMany()
                         .HasForeignKey("DDDDestinoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("VexTel.Domain.Entities.DDD", "DDDOrigem")
-                        .WithMany("CustoChamadasOrigem")
+                        .WithMany()
                         .HasForeignKey("DDDOrigemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
