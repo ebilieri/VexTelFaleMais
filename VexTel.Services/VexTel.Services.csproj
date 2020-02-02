@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VexTel.Domain\VexTel.Domain.csproj" />
+    <ProjectReference Include="..\VexTel.Repository\VexTel.Repository.csproj" />
+  </ItemGroup>
+
+</Project>
