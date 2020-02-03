@@ -15,7 +15,7 @@ namespace VexTel.Services
 
         public List<string> Erros { get; set; }
 
-        public void Add(TEntity entity)
+        public virtual void Add(TEntity entity)
         {
             _baseRepository.Add(entity);
         }

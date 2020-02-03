@@ -50,6 +50,7 @@ namespace VexTel.App
 
             services.AddScoped<IDDDService, DDDService>();
             services.AddScoped<IPlanoService, PlanoService>();
+            services.AddScoped<ICustoChamadaService, CustoChamadaService>();
 
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
