@@ -9,5 +9,6 @@ namespace VexTel.Domain.Entities
         public int Id { get; set; }
         public string Descricao { get; set; }
         public int TempoMinutos { get; set; }
+        public decimal CustoAdicionalMinuto { get; set; }
     }
 }

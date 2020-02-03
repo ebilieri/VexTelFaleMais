@@ -10,7 +10,8 @@ namespace VexTel.Repository.Config
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Descricao).IsRequired().HasMaxLength(30);
-            builder.Property(x => x.TempoMinutos).IsRequired();            
+            builder.Property(x => x.TempoMinutos).IsRequired();
+            builder.Property(x => x.CustoAdicionalMinuto).IsRequired();
         }
     }
 }
