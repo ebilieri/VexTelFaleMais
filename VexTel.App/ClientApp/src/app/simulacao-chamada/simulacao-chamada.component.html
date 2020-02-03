@@ -95,8 +95,8 @@
       <td style="width:10%">{{p.dddDestino.codigo}}</td>
       <td style="width:10%">{{p.tempo}}</td>      
       <td style="width:25%">{{p.plano.descricao}}</td>
-      <td>{{p.custoComFaleMais}}</td>
-      <td>{{p.custoSemFaleMais}}</td>
+      <td>{{p.custoComFaleMais | currency:'BRL':'symbol':'0.2-2':'pt'}}</td>
+      <td>{{p.custoSemFaleMais | currency:'BRL':'symbol':'0.2-2':'pt'}}</td>
     </tr>
   </tbody>
 </table>
