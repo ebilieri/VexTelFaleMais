@@ -1,3 +1,49 @@
-<div>
-  teste
-</div>
+﻿<h4>Simule aqui o melhor Plano para você</h4>
+
+<form>
+
+
+  <div class="form-row">
+
+    <div class="form-group col-md-3">
+      <label for="inputDDDOrigem">DDD Origem</label>
+      <select id="inputDDDOrigem" class="form-control">
+        <option selected>Selecione...</option>
+        <option *ngFor="let ddd of listDdds" value={{ddd.id}}>
+          {{ddd.codigo}}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group col-md-3">
+      <label for="inputDDDDestino">DDD Destino</label>
+      <select id="inputDDDDestino" class="form-control"
+              required name="dddOrigem"
+              [(ngModel)]="simulacaoChamada.dDDOrigem"
+              #nome="ngModel">
+        <option selected>Selecione...</option>
+        <option *ngFor="let ddd of listDdds" value={{ddd.id}}>
+          {{ddd.codigo}}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group col-md-2">
+      <label for="inputTempo">Tempo</label>
+      <input type="number" class="form-control" id="inputTempo">
+    </div>
+
+    <div class="form-group col-md-4">
+      <label for="inputDDDDestino">Plano</label>
+      <select id="inputDDDDestino" class="form-control">
+        <option selected>Selecione...</option>
+        <option *ngFor="let ddd of listDdds" value={{ddd.id}}>
+          {{ddd.codigo}}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary"
+          (click)="simular()">Calcular</button>
+</form>

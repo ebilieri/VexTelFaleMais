@@ -38,6 +38,7 @@
     <None Remove="ClientApp\src\app\models\plano.ts" />
     <None Remove="ClientApp\src\app\models\simulacaoChamada.ts" />
     <None Remove="ClientApp\src\app\services\dddService.ts" />
+    <None Remove="ClientApp\src\app\services\simulacaoChamadaService.ts" />
     <None Remove="ClientApp\src\app\simulacao-chamada\simulacao-chamada.component.ts" />
   </ItemGroup>
 
@@ -51,6 +52,9 @@
     <TypeScriptCompile Include="ClientApp\src\app\models\ddd.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\plano.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\simulacaoChamada.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\simulacaoChamadaService.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\services\dddService.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\simulacao-chamada\simulacao-chamada.component.ts" />
   </ItemGroup>
