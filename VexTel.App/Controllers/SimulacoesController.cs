@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VexTel.Domain.Contracts.IServices;
+using VexTel.Domain.Entities;
 
 namespace VexTel.App.Controllers
 {
@@ -16,6 +17,21 @@ namespace VexTel.App.Controllers
         public SimulacoesController(ISimulacaoChamadaService simulacaoChamadaService)
         {
             _simulacaoChamadaService = simulacaoChamadaService;
+        }
+
+        [HttpPost]
+        public ActionResult Simular(SimulacaoChamada simulacaoChamada)
+        {
+            try
+            {
+                //simulacaoChamada.
+                _simulacaoChamadaService.Simular(simulacaoChamada);
+                return Ok(simulacaoChamada);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.ToString());
+            }
         }
     }
 }
