@@ -37,6 +37,8 @@
     <None Remove="ClientApp\src\app\models\ddd.ts" />
     <None Remove="ClientApp\src\app\models\plano.ts" />
     <None Remove="ClientApp\src\app\models\simulacaoChamada.ts" />
+    <None Remove="ClientApp\src\app\services\dddService.ts" />
+    <None Remove="ClientApp\src\app\simulacao-chamada\simulacao-chamada.component.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -49,6 +51,8 @@
     <TypeScriptCompile Include="ClientApp\src\app\models\ddd.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\plano.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\simulacaoChamada.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\dddService.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\simulacao-chamada\simulacao-chamada.component.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
