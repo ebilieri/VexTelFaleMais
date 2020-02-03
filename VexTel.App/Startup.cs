@@ -30,8 +30,8 @@ namespace VexTel.App
         {
 
             // String de conexão com o Banco de dados (MySql)
-            //var connectionString = Configuration.GetConnectionString("VexTelConnection");
-            var connectionString = Configuration.GetConnectionString("VexTelRemoteMysql");
+            var connectionString = Configuration.GetConnectionString("VexTelConnection");
+            //var connectionString = Configuration.GetConnectionString("VexTelRemoteMysql");
 
             // Configurar context banco de dados
             services.AddDbContext<VexTelContext>(option =>
@@ -51,6 +51,7 @@ namespace VexTel.App
             services.AddScoped<IDDDService, DDDService>();
             services.AddScoped<IPlanoService, PlanoService>();
             services.AddScoped<ICustoChamadaService, CustoChamadaService>();
+            services.AddScoped<ISimulacaoChamadaService, SimulacaoChamadaService>();
 
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory

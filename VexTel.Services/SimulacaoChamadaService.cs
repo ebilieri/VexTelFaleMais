@@ -11,29 +11,33 @@ namespace VexTel.Services
         private readonly IPlanoService _planoService;
         private readonly ICustoChamadaService _custoChamadaService;
 
-        public SimulacaoChamadaService(IPlanoService planoService, 
+        public SimulacaoChamadaService(IPlanoService planoService,
             ICustoChamadaService custoChamadaService)
         {
             _planoService = planoService;
             _custoChamadaService = custoChamadaService;
         }
+
         public void Simular(SimulacaoChamada simulacaoChamada)
         {
             Plano plano = _planoService.GetById(simulacaoChamada.PlanoId);
-
+            simulacaoChamada.Plano = plano;
             CustoChamada custoChamada = _custoChamadaService.Get(simulacaoChamada.DDDOrigemId, simulacaoChamada.DDDDestinoId);
 
+            //Custo sem fale mais
             simulacaoChamada.CustoSemFaleMais = simulacaoChamada.Tempo * custoChamada.CustoMinuto;
 
+            // Custo com fale mais
             if (simulacaoChamada.Tempo > plano.TempoMinutos)
             {
                 int minutosExcente = simulacaoChamada.Tempo - plano.TempoMinutos;
                 simulacaoChamada.CustoComFaleMais = minutosExcente * custoChamada.CustoMinuto;
                 // adicionar acrescimo
-                simulacaoChamada.CustoComFaleMais = simulacaoChamada.CustoComFaleMais * plano.CustoAdicionalMinuto / 100;
-            }else
+                simulacaoChamada.CustoComFaleMais += simulacaoChamada.CustoComFaleMais * plano.CustoAdicionalMinuto / 100;
+            }
+            else
             {
-                simulacaoChamada.CustoComFaleMais = 0;//
+                simulacaoChamada.CustoComFaleMais = 0;
             }
         }
     }

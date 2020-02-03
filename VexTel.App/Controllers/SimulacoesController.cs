@@ -19,12 +19,24 @@ namespace VexTel.App.Controllers
             _simulacaoChamadaService = simulacaoChamadaService;
         }
 
-        [HttpPost]
-        public ActionResult Simular(SimulacaoChamada simulacaoChamada)
+        [HttpGet]
+        public ActionResult Get()
         {
             try
             {
-                //simulacaoChamada.
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.ToString());
+            }
+        }
+
+        [HttpPost("simular")]
+        public ActionResult Simular(SimulacaoChamada simulacaoChamada)
+        {
+            try
+            {                
                 _simulacaoChamadaService.Simular(simulacaoChamada);
                 return Ok(simulacaoChamada);
             }
