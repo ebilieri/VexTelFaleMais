@@ -1,5 +1,4 @@
-﻿using System;
-using VexTel.Domain.Contracts.IRepositories;
+﻿using VexTel.Domain.Contracts.IRepositories;
 using VexTel.Domain.Contracts.IServices;
 using VexTel.Domain.Entities;
 

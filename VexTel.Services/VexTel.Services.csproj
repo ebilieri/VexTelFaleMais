@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\VexTel.Domain\VexTel.Domain.csproj" />
-    <ProjectReference Include="..\VexTel.Repository\VexTel.Repository.csproj" />
   </ItemGroup>
 
 </Project>

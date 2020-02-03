@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace VexTel.Domain.Entities
+﻿namespace VexTel.Domain.Entities
 {
-   public class DDD
+    public class DDD
     {
         public int Id { get; set; }
         public string Codigo { get; set; }        

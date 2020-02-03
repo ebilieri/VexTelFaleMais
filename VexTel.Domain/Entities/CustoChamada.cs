@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace VexTel.Domain.Entities
+﻿namespace VexTel.Domain.Entities
 {
-   public class CustoChamada
+    public class CustoChamada
     {
         public int Id { get; set; }
         public int DDDOrigemId { get; set; }

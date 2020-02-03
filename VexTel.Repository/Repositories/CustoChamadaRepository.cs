@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using VexTel.Domain.Contracts.IRepositories;
 using VexTel.Domain.Entities;
 using VexTel.Repository.Context;
