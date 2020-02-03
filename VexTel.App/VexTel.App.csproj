@@ -33,8 +33,22 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\models\custoChamada.ts" />
+    <None Remove="ClientApp\src\app\models\ddd.ts" />
+    <None Remove="ClientApp\src\app\models\plano.ts" />
+    <None Remove="ClientApp\src\app\models\simulacaoChamada.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\VexTel.Repository\VexTel.Repository.csproj" />
     <ProjectReference Include="..\VexTel.Services\VexTel.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\models\custoChamada.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\ddd.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\plano.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\simulacaoChamada.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
