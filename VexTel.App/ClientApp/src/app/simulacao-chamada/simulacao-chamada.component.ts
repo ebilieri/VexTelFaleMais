@@ -6,6 +6,7 @@ import { SimulacaoChamada } from '../models/simulacaoChamada';
 import { SimulacaoChamadaService } from '../services/simulacaoChamadaService';
 import { PlanoService } from '../services/planoService';
 import { Plano } from '../models/plano';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-simulacao',
@@ -28,7 +29,8 @@ export class SimulacaoChamadaComponent implements OnInit {
   constructor(private dddService: DDDService,
     private simulacaoService: SimulacaoChamadaService,
     private planoService: PlanoService,
-    private router: Router) {
+    private router: Router,
+    private toast: ToastrService) {
 
     this.CarregarDdds();
     this.CarregarPlanos();
@@ -64,6 +66,7 @@ export class SimulacaoChamadaComponent implements OnInit {
         },
         erro => {
           console.log(erro.error);
+          this.toast.error(erro.error, "Erro!");
         });
   }
 
