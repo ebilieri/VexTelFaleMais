@@ -7,8 +7,10 @@ namespace VexTel.Services
 {
     public class CustoChamadaService : BaseService<CustoChamada>, ICustoChamadaService
     {
-        public CustoChamadaService(IBaseRepository<CustoChamada> baseRepository) : base(baseRepository)
+        private readonly ICustoChamadaRepository _custoChamadaRepository;
+        public CustoChamadaService(ICustoChamadaRepository baseRepository) : base(baseRepository)
         {
+            _custoChamadaRepository = baseRepository;
         }
 
         public override void Add(CustoChamada entity)
@@ -19,6 +21,11 @@ namespace VexTel.Services
             }
 
             base.Add(entity);
+        }
+
+        public CustoChamada Get(int dDDOrigemId, int dDDDestinoId)
+        {
+            return _custoChamadaRepository.Get(dDDOrigemId, dDDDestinoId);
         }
     }
 }
