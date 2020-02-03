@@ -13,6 +13,8 @@ namespace VexTel.Services
             _baseRepository = baseRepository;
         }
 
+        public List<string> Erros { get; set; }
+
         public void Add(TEntity entity)
         {
             _baseRepository.Add(entity);

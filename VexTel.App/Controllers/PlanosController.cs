@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using VexTel.Domain.Contracts.IRepositories;
 using VexTel.Domain.Contracts.IServices;
 using VexTel.Domain.Entities;
 
@@ -11,13 +10,13 @@ namespace VexTel.App.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class DDDsController: ControllerBase
+    public class PlanosController: ControllerBase
     {
-        private readonly IDDDService _DDDService;
+        private readonly IPlanoService _planoService;
 
-        public DDDsController(IDDDService DDDService)
+        public PlanosController(IPlanoService planoService)
         {
-            _DDDService = DDDService;
+            _planoService = planoService;
         }
 
         [HttpGet]
@@ -25,7 +24,7 @@ namespace VexTel.App.Controllers
         {
             try
             {
-                return Ok(_DDDService.GetAll());
+                return Ok(_planoService.GetAll());
             }
             catch (Exception ex)
             {
@@ -34,12 +33,12 @@ namespace VexTel.App.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(DDD ddd)
+        public ActionResult Add(Plano plano)
         {
             try
             {
-                _DDDService.Add(ddd);
-                return Created("api/ddds", ddd);
+                _planoService.Add(plano);
+                return Created("api/ddds", plano);
             }
             catch (Exception ex)
             {
