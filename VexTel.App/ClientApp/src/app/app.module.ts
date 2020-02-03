@@ -12,6 +12,8 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
 // Importar componentes criados aqui
 import { SimulacaoChamadaComponent } from './simulacao-chamada/simulacao-chamada.component';
 import { DDDService } from './services/dddService';
+import { SimulacaoChamadaService } from './services/simulacaoChamadaService';
+import { PlanoService } from './services/planoService';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { DDDService } from './services/dddService';
     ])
   ],
   providers: [
-    DDDService
+    DDDService,
+    PlanoService,
+    SimulacaoChamadaService
   ],
   bootstrap: [AppComponent]
 })

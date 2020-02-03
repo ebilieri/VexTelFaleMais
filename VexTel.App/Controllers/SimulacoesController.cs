@@ -25,7 +25,7 @@ namespace VexTel.App.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.ToString());
+                return BadRequest(ex.Message);
             }
         }
 
@@ -39,7 +39,7 @@ namespace VexTel.App.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.ToString());
+                return BadRequest(ex.Message);
             }
         }
     }

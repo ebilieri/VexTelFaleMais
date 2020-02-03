@@ -7,7 +7,7 @@ import { SimulacaoChamada } from '../models/simulacaoChamada';
   providedIn: 'root'
 })
 
-export class simulacaoChamadaService implements OnInit {
+export class SimulacaoChamadaService implements OnInit {
   private baseURL: string;
 
   get headers(): HttpHeaders {

@@ -7,8 +7,15 @@
 
     <div class="form-group col-md-3">
       <label for="inputDDDOrigem">DDD Origem</label>
-      <select id="inputDDDOrigem" class="form-control">
-        <option selected>Selecione...</option>
+      <select id="inputDDDOrigem" class="form-control" data-val="true"
+              required name="dddOrigem"
+              [ngClass]="{
+                'is-invalid':(dddOrigemId.dirty || dddOrigemId.touched) && dddOrigemId.value == 0 ,
+                'is-valid':dddOrigemId.valid && (dddOrigemId.dirty || dddOrigemId.touched)
+              }"
+              [(ngModel)]="simulacaoChamada.dddOrigemId"
+              #dddOrigemId="ngModel">
+        <option value="0" selected>Selecione...</option>
         <option *ngFor="let ddd of listDdds" value={{ddd.id}}>
           {{ddd.codigo}}
         </option>
@@ -18,10 +25,14 @@
     <div class="form-group col-md-3">
       <label for="inputDDDDestino">DDD Destino</label>
       <select id="inputDDDDestino" class="form-control"
-              required name="dddOrigem"
-              [(ngModel)]="simulacaoChamada.dDDOrigem"
-              #nome="ngModel">
-        <option selected>Selecione...</option>
+              required name="dddDestino"
+              [ngClass]="{
+                'is-invalid':(dddDestinoId.dirty || dddDestinoId.touched) && dddDestinoId.value == 0,
+                'is-valid':dddDestinoId.valid && (dddDestinoId.dirty || dddDestinoId.touched)
+              }"
+              [(ngModel)]="simulacaoChamada.dddDestinoId"
+              #dddDestinoId="ngModel">
+        <option value="0" selected>Selecione...</option>
         <option *ngFor="let ddd of listDdds" value={{ddd.id}}>
           {{ddd.codigo}}
         </option>
@@ -30,20 +41,62 @@
 
     <div class="form-group col-md-2">
       <label for="inputTempo">Tempo</label>
-      <input type="number" class="form-control" id="inputTempo">
+      <input type="number" class="form-control" id="inputTempo" name="tempoMinutos"
+             min="1"
+             placeholder="Minutos"
+             [ngClass]="{
+                'is-invalid':tempo.invalid && (tempo.dirty || tempo.touched),
+                'is-valid':tempo.valid && (tempo.dirty || tempo.touched)
+              }"
+             [(ngModel)]="simulacaoChamada.tempo"
+             #tempo="ngModel"
+             required />
     </div>
 
     <div class="form-group col-md-4">
-      <label for="inputDDDDestino">Plano</label>
-      <select id="inputDDDDestino" class="form-control">
-        <option selected>Selecione...</option>
-        <option *ngFor="let ddd of listDdds" value={{ddd.id}}>
-          {{ddd.codigo}}
+      <label for="inputPlano">Plano</label>
+      <select id="inputPlano" class="form-control"
+              required name="plano"
+              [ngClass]="{
+                'is-invalid':(planoId.dirty || planoId.touched) && planoId.value == 0,
+                'is-valid':planoId.valid && (planoId.dirty || planoId.touched)
+              }"
+              [(ngModel)]="simulacaoChamada.planoId"
+              #planoId="ngModel">
+        <option value="0" selected>Selecione...</option>
+        <option *ngFor="let p of listPlanos" value={{p.id}}>
+          {{p.descricao}}
         </option>
       </select>
     </div>
   </div>
 
   <button type="submit" class="btn btn-primary"
-          (click)="simular()">Calcular</button>
+          (click)="simular()">
+    Calcular
+  </button>
 </form>
+
+<br /><br />
+<table class="table table-hover" *ngIf="listSimulacao?.length>0">
+  <thead>
+    <tr>
+      <th>Origem</th>
+      <th>Destino</th>
+      <th>Tempo</th>
+      <th>Plano FaleMais</th>
+      <th>Com FaleMais</th>
+      <th>Sem FaleMais</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let p of listSimulacao">
+      <td style="width:10%">{{p.dddOrigem.codigo}}</td>
+      <td style="width:10%">{{p.dddDestino.codigo}}</td>
+      <td style="width:10%">{{p.tempo}}</td>      
+      <td style="width:25%">{{p.plano.descricao}}</td>
+      <td>{{p.custoComFaleMais}}</td>
+      <td>{{p.custoSemFaleMais}}</td>
+    </tr>
+  </tbody>
+</table>
