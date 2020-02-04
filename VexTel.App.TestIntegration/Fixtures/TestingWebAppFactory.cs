@@ -3,13 +3,10 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
-using System.Threading.Tasks;
 using VexTel.Repository.Context;
 
-namespace VexTel.App.TestIntegration
+namespace VexTel.App.TestIntegration.Fixtures
 {
     public class TestingWebAppFactory<T> : WebApplicationFactory<Startup>
     {
@@ -27,24 +24,24 @@ namespace VexTel.App.TestIntegration
                     services.Remove(descriptor);
                 }
 
+                ////var connectionString = "server=remotemysql.com;userid=2hNtbAnF4H;password=ete1uXVHp6;database=2hNtbAnF4H";
+                //var connectionString = "server=localhost;userid=root;password=mysql@2019;database=VexTelAngularDB";
+
+                //// Configurar context banco de dados
+                //services.AddDbContext<VexTelContext>(option =>
+                //        option.UseLazyLoadingProxies()
+                //            .UseMySql(connectionString, m =>
+                //                m.MigrationsAssembly("VexTel.Repository")));
+
                 var serviceProvider = new ServiceCollection()
-                .AddEntityFrameworkMySql()
-                  //.AddEntityFrameworkInMemoryDatabase()
+                  .AddEntityFrameworkInMemoryDatabase()
                   .BuildServiceProvider();
 
-                var connectionString = "server=remotemysql.com;userid=2hNtbAnF4H;password=ete1uXVHp6;database=2hNtbAnF4H";
-
-                // Configurar context banco de dados
-                services.AddDbContext<VexTelContext>(option =>
-                        option.UseLazyLoadingProxies()
-                            .UseMySql(connectionString, m =>
-                                m.MigrationsAssembly("VexTel.Repository")));
-
-                //services.AddDbContext<VexTelContext>(options =>
-                //{
-                //    options.UseInMemoryDatabase("InMemoryEmployeeTest");
-                //    options.UseInternalServiceProvider(serviceProvider);
-                //});
+                services.AddDbContext<VexTelContext>(options =>
+                {
+                    options.UseInMemoryDatabase("InMemoryEmployeeTest");
+                    options.UseInternalServiceProvider(serviceProvider);
+                });
 
                 var sp = services.BuildServiceProvider();
 
