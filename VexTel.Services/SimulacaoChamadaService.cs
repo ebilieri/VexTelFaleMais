@@ -23,7 +23,7 @@ namespace VexTel.Services
         }
 
         public void Simular(SimulacaoChamada simulacaoChamada)
-        {            
+        {
             Validar(simulacaoChamada);
             if (Erros.Count > 0)
                 throw new Exception(string.Join(". ", Erros.ToArray()));
@@ -34,22 +34,31 @@ namespace VexTel.Services
             simulacaoChamada.Plano = _planoService.GetById(simulacaoChamada.PlanoId);
             // Buscar Custo Chamada
             CustoChamada custoChamada = _custoChamadaService.Get(simulacaoChamada.DDDOrigemId, simulacaoChamada.DDDDestinoId);
-            //Custo sem fale mais
-            simulacaoChamada.CustoSemFaleMais = simulacaoChamada.Tempo * custoChamada.CustoMinuto;
 
-            // Custo com fale mais
-            if (simulacaoChamada.Tempo > simulacaoChamada.Plano.TempoMinutos)
+            if (custoChamada != null)
             {
-                // obter total de minutos excedentes do plano selecionado
-                int minutosExcedente = simulacaoChamada.Tempo - simulacaoChamada.Plano.TempoMinutos;
-                // calcular custo com fale mais
-                simulacaoChamada.CustoComFaleMais = minutosExcedente * custoChamada.CustoMinuto;
-                // adicionar acrescimo
-                simulacaoChamada.CustoComFaleMais += simulacaoChamada.CustoComFaleMais * simulacaoChamada.Plano.CustoAdicionalMinuto / 100;
+                //Custo sem fale mais
+                simulacaoChamada.CustoSemFaleMais = (simulacaoChamada.Tempo * custoChamada.CustoMinuto).ToString("C2");
+
+                // Custo com fale mais
+                if (simulacaoChamada.Tempo > simulacaoChamada.Plano.TempoMinutos)
+                {
+                    // obter total de minutos excedentes do plano selecionado
+                    int minutosExcedente = simulacaoChamada.Tempo - simulacaoChamada.Plano.TempoMinutos;
+                    // calcular custo com fale mais
+                    simulacaoChamada.CustoComFaleMais = (minutosExcedente * custoChamada.CustoMinuto).ToString("N2");
+                    // adicionar acrescimo
+                    simulacaoChamada.CustoComFaleMais = (Convert.ToDecimal(simulacaoChamada.CustoComFaleMais) + Convert.ToDecimal(simulacaoChamada.CustoComFaleMais) * simulacaoChamada.Plano.CustoAdicionalMinuto / 100).ToString("C2");
+                }
+                else
+                {
+                    simulacaoChamada.CustoComFaleMais = 0.ToString("C2");
+                }
             }
             else
             {
-                simulacaoChamada.CustoComFaleMais = 0;
+                simulacaoChamada.CustoComFaleMais = "-";
+                simulacaoChamada.CustoSemFaleMais = "-";
             }
         }
 
@@ -65,11 +74,7 @@ namespace VexTel.Services
 
             if (simulacaoChamada.DDDOrigemId == simulacaoChamada.DDDDestinoId)
                 Erros.Add("O DDD de Destino deve ser diferente do DDD de Origem");
-
-            // Buscar Custo Chamada            
-            if (_custoChamadaService.Get(simulacaoChamada.DDDOrigemId, simulacaoChamada.DDDDestinoId) == null)
-                Erros.Add("Preço não disponível para o destino informado");
-
+           
             if (simulacaoChamada.PlanoId <= 0)
                 Erros.Add("Informe o Plano Fale Mais");
 

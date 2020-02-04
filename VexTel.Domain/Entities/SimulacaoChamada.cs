@@ -10,8 +10,8 @@
         public int PlanoId { get; set; }
         public virtual Plano Plano { get; set; }
         public int Tempo { get; set; }
-        public decimal CustoComFaleMais { get; set; }
-        public decimal CustoSemFaleMais { get; set; }   
+        public string CustoComFaleMais { get; set; }
+        public string CustoSemFaleMais { get; set; }   
 
     }
 }

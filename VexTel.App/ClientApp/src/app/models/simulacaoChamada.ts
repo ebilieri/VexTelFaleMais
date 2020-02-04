@@ -7,8 +7,8 @@ export class SimulacaoChamada {
   dddDestinoId: number;
   planoId: number;
   tempo: number;
-  custoComFaleMais: number;
-  custoSemFaleMais: number;
+  custoComFaleMais: string;
+  custoSemFaleMais: string;
   dddOrigem: DDD;
   dddDestino: DDD;
   plano: Plano;
