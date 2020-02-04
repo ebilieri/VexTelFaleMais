@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using Newtonsoft.Json;
+using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -11,6 +12,7 @@ using Xunit;
 
 namespace VexTel.App.TestIntegration.Scenarios
 {
+    [ExcludeFromCodeCoverage]
     public class PlanosControllerIntegrationTest : IClassFixture<TestingWebAppFactory<Startup>>
     {
         private readonly HttpClient _client;

@@ -79,7 +79,8 @@
   </button>
 </form>
 
-<br /><br />
+<br />
+<br />
 <table class="table table-hover" *ngIf="listSimulacao?.length>0">
   <thead>
     <tr>
@@ -95,10 +96,20 @@
     <tr *ngFor="let p of listSimulacao">
       <td style="width:10%">{{p.dddOrigem.codigo}}</td>
       <td style="width:10%">{{p.dddDestino.codigo}}</td>
-      <td style="width:10%">{{p.tempo}}</td>      
+      <td style="width:10%">{{p.tempo}}</td>
       <td style="width:25%">{{p.plano.descricao}}</td>
-      <td>{{p.custoComFaleMais}}</td>
-      <td>{{p.custoSemFaleMais}}</td>
+      <td>
+        <span *ngIf="p.custoComFaleMais >=0">
+          {{p.custoComFaleMais | currency:'BRL':'symbol':'0.2-2':'pt'}}
+        </span>
+        <span *ngIf="!p.custoComFaleMais">-</span>
+      </td>
+      <td>
+        <span *ngIf="p.custoSemFaleMais">
+          {{p.custoSemFaleMais | currency:'BRL':'symbol':'0.2-2':'pt'}}
+        </span>
+        <span *ngIf="!p.custoSemFaleMais">-</span>
+      </td>
     </tr>
   </tbody>
 </table>

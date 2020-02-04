@@ -38,7 +38,7 @@ namespace VexTel.Services
             if (custoChamada != null)
             {
                 //Custo sem fale mais
-                simulacaoChamada.CustoSemFaleMais = (simulacaoChamada.Tempo * custoChamada.CustoMinuto).ToString("C2");
+                simulacaoChamada.CustoSemFaleMais = simulacaoChamada.Tempo * custoChamada.CustoMinuto;
 
                 // Custo com fale mais
                 if (simulacaoChamada.Tempo > simulacaoChamada.Plano.TempoMinutos)
@@ -46,20 +46,20 @@ namespace VexTel.Services
                     // obter total de minutos excedentes do plano selecionado
                     int minutosExcedente = simulacaoChamada.Tempo - simulacaoChamada.Plano.TempoMinutos;
                     // calcular custo com fale mais
-                    simulacaoChamada.CustoComFaleMais = (minutosExcedente * custoChamada.CustoMinuto).ToString("N2");
+                    simulacaoChamada.CustoComFaleMais = minutosExcedente * custoChamada.CustoMinuto;
                     // adicionar acrescimo
-                    simulacaoChamada.CustoComFaleMais = (Convert.ToDecimal(simulacaoChamada.CustoComFaleMais) + Convert.ToDecimal(simulacaoChamada.CustoComFaleMais) * simulacaoChamada.Plano.CustoAdicionalMinuto / 100).ToString("C2");
+                    simulacaoChamada.CustoComFaleMais = Convert.ToDecimal(simulacaoChamada.CustoComFaleMais) + Convert.ToDecimal(simulacaoChamada.CustoComFaleMais) * simulacaoChamada.Plano.CustoAdicionalMinuto / 100;
                 }
                 else
                 {
-                    simulacaoChamada.CustoComFaleMais = 0.ToString("C2");
+                    simulacaoChamada.CustoComFaleMais = 0;
                 }
             }
-            else
-            {
-                simulacaoChamada.CustoComFaleMais = "-";
-                simulacaoChamada.CustoSemFaleMais = "-";
-            }
+            //else
+            //{
+            //    simulacaoChamada.CustoComFaleMais = "-";
+            //    simulacaoChamada.CustoSemFaleMais = "-";
+            //}
         }
 
         private void Validar(SimulacaoChamada simulacaoChamada)

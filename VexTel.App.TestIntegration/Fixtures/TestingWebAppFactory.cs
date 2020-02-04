@@ -3,11 +3,13 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using VexTel.Repository.Context;
 
 namespace VexTel.App.TestIntegration.Fixtures
 {
+    [ExcludeFromCodeCoverage]
     public class TestingWebAppFactory<T> : WebApplicationFactory<Startup>
     {
         protected override void ConfigureWebHost(IWebHostBuilder builder)
