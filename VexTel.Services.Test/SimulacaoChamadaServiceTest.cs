@@ -38,14 +38,14 @@ namespace VexTel.Services.Test
                 Tempo = tempo
             };
 
-            var veiculoService = new SimulacaoChamadaService(_dddServiceMock.Object,
+            var simulacaoChamadaService = new SimulacaoChamadaService(_dddServiceMock.Object,
                                                             _planoServiceMock.Object,
                                                             _custoChamadaServiceMock.Object);
             BindDDDs();
             BindPlanos();
             BindCustoChamadas();
 
-            veiculoService.Simular(simulacao);
+            simulacaoChamadaService.Simular(simulacao);
 
             Assert.Equal(comFaleMais, Convert.ToDecimal(simulacao.CustoComFaleMais));
             Assert.Equal(semFaleMais, Convert.ToDecimal(simulacao.CustoSemFaleMais));
