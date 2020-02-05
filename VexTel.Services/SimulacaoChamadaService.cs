@@ -54,12 +54,7 @@ namespace VexTel.Services
                 {
                     simulacaoChamada.CustoComFaleMais = 0;
                 }
-            }
-            //else
-            //{
-            //    simulacaoChamada.CustoComFaleMais = "-";
-            //    simulacaoChamada.CustoSemFaleMais = "-";
-            //}
+            }            
         }
 
         private void Validar(SimulacaoChamada simulacaoChamada)

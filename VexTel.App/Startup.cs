@@ -7,7 +7,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
+using System;
 using VexTel.Domain.Contracts.IRepositories;
 using VexTel.Domain.Contracts.IServices;
 using VexTel.Repository.Context;
@@ -28,18 +30,39 @@ namespace VexTel.App
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Sweggar configuration
+            // Register the Swagger generator, defining 1 or more Swagger documents
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "VexTel FaleMais",
+                    Version = "v1",
+                    Description = "A simple example ASP.NET Core Web API",
+                    TermsOfService = new Uri("https://github.com/ebilieri"),
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Emerson Bilieri",
+                        Email = string.Empty,
+                        Url = new Uri("https://github.com/ebilieri"),
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "Use under LICX",
+                        Url = new Uri("https://github.com/ebilieri"),
+                    }
+                });
+            });
 
             // String de conexão com o Banco de dados (MySql)
-            var connectionString = Configuration.GetConnectionString("VexTelConnection");
-            //var connectionString = Configuration.GetConnectionString("VexTelRemoteMysql");
+            //var connectionString = Configuration.GetConnectionString("VexTelConnection");
+            var connectionString = Configuration.GetConnectionString("VexTelRemoteMysql");
 
             // Configurar context banco de dados
             services.AddDbContext<VexTelContext>(option =>
                     option.UseLazyLoadingProxies()
                         .UseMySql(connectionString, m =>
                             m.MigrationsAssembly("VexTel.Repository")));
-
-
 
             // Mapeamento Injeção de dependencia
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
@@ -63,7 +86,7 @@ namespace VexTel.App
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
-            services.AddMvc().AddNewtonsoftJson(options => { options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore; });
+            services.AddMvc().AddNewtonsoftJson(options => { options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore; });            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -79,6 +102,16 @@ namespace VexTel.App
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "VexTel FaleMais v1");
+            });
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -107,7 +140,7 @@ namespace VexTel.App
                 {
                     spa.UseAngularCliServer(npmScript: "start");
                 }
-            });
+            });            
         }
     }
 }
